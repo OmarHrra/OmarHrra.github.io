@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/mystyles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Map Editor</title>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown">
+            <a class="dropdown-item" href="#" id="new_map">New</a>
+            <a class="dropdown-item" href="#" id="load_json_a">Load</a>
+            <a class="dropdown-item" href="#" id="save_json">Save</a>
+            <input class="dropdown-item" type="file" name="file" id="load_json" style="display:none;">
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="container-fluid unselectable">
+    <div class="row s-row-1 bg-primary">
+      <div class="col-3 s-col-1">
+        <p class="tileset_status text-center card-text">Tileset</p>
+      </div>
+      <div class="col-9">
+        <div class="col d-flex justify-content-start">
+          <a class="active-button tool-button" id="btn_tool_0"><img src="images/pencil.png" alt="pencil" width="30" height="30"></a>
+          <a class="tool-button" id="btn_tool_1"><img src="images/bucket.png" alt="paint bucket" width="30" height="30"></a>
+          <a class="tool-button" id="btn_tool_2"><img src="images/erase.png" alt="erase" width="30" height="30"></a>
+        </div>
+      </div>
+    </div>
+    <div class="row s-row-2 bg-light">
+      <div class="col-3 s-col-2 tileset-area">
+        <canvas id="tileset_canvas" width="224" height="512"></canvas>
+      </div>
+      <div class="col-9 editor-area">
+        <canvas id="editor_canvas" width="320" height="320"></canvas>
+      </div>
+    </div>
+    <div class="row s-row-3 bg-light">
+      <div class="col-3 s-col-3">
+        <p id="tileset_coordinates" class="text-left">Tile: [X: 0, Y: 0]</p>
+      </div>
+      <div class="col-7">
+        <p id="editor_coordinates" class="text-left">[X: 0, Y: 0] = 0,0</p>
+      </div>
+      <div class="col-2">
+        <p class="float-right text-right"><img src="images/Twitter_Social_Icon_Circle_Color.png" alt="Twitter" width="25" height="25"> <a target="_blank" href="https://twitter.com/OmarHrra">@OmarHrra</a></p>
+      </div>
+    </div>
+  </div>
+    <!--Bootsrap-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!--Editor-->
+    <script src="js/tileset.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/buttons.js"></script>
+  </body>
+</html>
