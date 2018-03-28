@@ -31,6 +31,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
   });
 
+  tilesetObj.ctx.canvas.addEventListener("mouseout", function(event){
+    tilesetObj.isClicked = false;
+  });
+
   // (?)
   currentTileset = new Image();
   // Tileset file direction

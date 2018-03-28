@@ -1,4 +1,5 @@
-var currentTool = 0;
+var currentTool = 0,
+    currentLayer = 0;
 
 window.onload = function() {
   var mapObj = {
@@ -7,9 +8,6 @@ window.onload = function() {
     "sizeY": 20,
     "tileSize": 16,
     "layer0": [],
-    "layer1": [],
-    "layer2": [],
-    "layer3": [],
     "currentPosition": [null, null],
     "lastPosition": [null, null]
   };
@@ -37,36 +35,103 @@ window.onload = function() {
     EditorPointer(mapObj, event.offsetX, event.offsetY);
   });
 
+  mapObj.ctx.canvas.addEventListener("mouseout", function(event){
+    // isEditorClicked = false;
+  });
+
+  LayersListeners(mapObj);
+
   // First draw
-  for (var i = 0; i < mapObj.sizeY; i++) {
+  for (var i = 0; i < 4; i++) {
     mapObj.layer0[i] = [];
-    mapObj.layer1[i] = [];
-    mapObj.layer2[i] = [];
-    mapObj.layer3[i] = [];
   }
+  for (var i = 0; i < 4; i++) {
+    for (var j = 0; j < mapObj.sizeX; j++) {
+      mapObj.layer0[i][j] = [];
+    }
+  }
+
   for (var i = 0; i < mapObj.sizeX; i++) {
     for (var j = 0; j < mapObj.sizeY; j++) {
-      mapObj.layer0[i][j] = tileSelected[0] + "," + tileSelected[1];
-      mapObj.layer1[i][j] = null;
-      mapObj.layer2[i][j] = null;
-      mapObj.layer3[i][j] = null;
+      mapObj.layer0[0][i][j] = tileSelected[0] + "," + tileSelected[1];
+      mapObj.layer0[1][i][j] = "-1,-1";
+      mapObj.layer0[2][i][j] = "-1,-1";
+      mapObj.layer0[3][i][j] = "-1,-1";
     }
   }
   DrawEditor(mapObj);
 };
 
-
 function DrawEditor(mapObj){
   // Clear map
   mapObj.ctx.clearRect(0, 0, mapObj.ctx.canvas.width, mapObj.ctx.canvas.height);
 
+  // Draw layers
+  // for ( i = 0; i < 4; i++) {
+  //   for ( j = 0; j < mapObj.sizeX; j++) {
+  //     for ( k = 0; k < mapObj.sizeY; k++) {
+  //       var posXY = mapObj.layer0[i][j][k].split(",");
+  //       mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, j*mapObj.tileSize, k*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
+  //     }
+  //   }
+  // }
   // Draw layer 0
   for (var i = 0; i < mapObj.sizeX; i++) {
     for (var j = 0; j < mapObj.sizeY; j++) {
-      var posXY = mapObj.layer0[i][j].split(",");
+      var posXY = mapObj.layer0[0][i][j].split(",");
       mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, i*mapObj.tileSize, j*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
     }
   }
+  // Draw layer 1
+  if (currentLayer === 0) {
+    mapObj.ctx.globalAlpha = 0.5;
+  }
+  if (currentLayer === 1){
+    mapObj.ctx.globalAlpha = 0.5;
+    mapObj.ctx.fillStyle = "#000000";
+    mapObj.ctx.fillRect(0, 0, mapObj.ctx.canvas.width, mapObj.ctx.canvas.height);
+    mapObj.ctx.globalAlpha = 1;
+  }
+  for (var i = 0; i < mapObj.sizeX; i++) {
+    for (var j = 0; j < mapObj.sizeY; j++) {
+      var posXY = mapObj.layer0[1][i][j].split(",");
+      mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, i*mapObj.tileSize, j*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
+    }
+  }
+  // Draw layer 2
+  if (currentLayer === 1) {
+    mapObj.ctx.globalAlpha = 0.5;
+  }
+  if(currentLayer === 2){
+    mapObj.ctx.globalAlpha = 0.5;
+    mapObj.ctx.fillStyle = "#000000";
+    mapObj.ctx.fillRect(0, 0, mapObj.ctx.canvas.width, mapObj.ctx.canvas.height);
+    mapObj.ctx.globalAlpha = 1;
+  }
+  for (var i = 0; i < mapObj.sizeX; i++) {
+    for (var j = 0; j < mapObj.sizeY; j++) {
+      var posXY = mapObj.layer0[2][i][j].split(",");
+      mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, i*mapObj.tileSize, j*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
+    }
+  }
+  // Draw layer 3
+  if (currentLayer === 2) {
+    mapObj.ctx.globalAlpha = 0.5;
+  }
+  if(currentLayer === 3){
+    mapObj.ctx.globalAlpha = 0.5;
+    mapObj.ctx.fillStyle = "#000000";
+    mapObj.ctx.fillRect(0, 0, mapObj.ctx.canvas.width, mapObj.ctx.canvas.height);
+    mapObj.ctx.globalAlpha = 1;
+  }
+  for (var i = 0; i < mapObj.sizeX; i++) {
+    for (var j = 0; j < mapObj.sizeY; j++) {
+      var posXY = mapObj.layer0[3][i][j].split(",");
+      mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, i*mapObj.tileSize, j*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
+    }
+  }
+  mapObj.ctx.globalAlpha = 1;
+
 }
 
 function Tool(mapObj){
@@ -86,11 +151,11 @@ function Tool(mapObj){
 }
 
 function Pencil(mapObj){
-  mapObj.layer0[mapObj.currentPosition[0]][mapObj.currentPosition[1]] = tileSelected[0] + "," + tileSelected[1];
+  mapObj.layer0[currentLayer][mapObj.currentPosition[0]][mapObj.currentPosition[1]] = tileSelected[0] + "," + tileSelected[1];
 }
 
 function Bucket(mapObj){
-  var previousTile = mapObj.layer0[mapObj.currentPosition[0]][mapObj.currentPosition[1]];
+  var previousTile = mapObj.layer0[currentLayer][mapObj.currentPosition[0]][mapObj.currentPosition[1]];
   if(previousTile === tileSelected[0] + "," + tileSelected[1]){
     return;
   }
@@ -101,10 +166,10 @@ function BucketRecursive(mapObj, x, y, previousTile){
   if(x >= mapObj.sizeX || y >= mapObj.sizeY || x < 0 || y < 0){
     return;
   }
-  if(mapObj.layer0[x][y] != previousTile){
+  if(mapObj.layer0[currentLayer][x][y] != previousTile){
     return;
   }
-  mapObj.layer0[x][y] = tileSelected[0] + "," + tileSelected[1];
+  mapObj.layer0[currentLayer][x][y] = tileSelected[0] + "," + tileSelected[1];
   setTimeout(BucketRecursive(mapObj, x, y-1, previousTile), 10);
   setTimeout(BucketRecursive(mapObj, x, y+1, previousTile), 10);
   setTimeout(BucketRecursive(mapObj, x+1, y, previousTile), 10);
@@ -112,7 +177,7 @@ function BucketRecursive(mapObj, x, y, previousTile){
 }
 
 function Erase(mapObj){
-  mapObj.layer0[mapObj.currentPosition[0]][mapObj.currentPosition[1]] = "Null";
+  mapObj.layer0[currentLayer][mapObj.currentPosition[0]][mapObj.currentPosition[1]] = "-1,-1";
 }
 
 function EditorPointer(mapObj, posX, posY){
@@ -123,23 +188,25 @@ function EditorPointer(mapObj, posX, posY){
   mapObj.currentPosition[0] = Math.trunc(posX/mapObj.tileSize);
   mapObj.currentPosition[1] = Math.trunc(posY/mapObj.tileSize);
 
-  // if(mapObj.currentPosition[0] === mapObj.lastPosition[0] && mapObj.currentPosition[1] === mapObj.lastPosition[1]){
-  //   return;
-  // }else{
-  //   mapObj.lastPosition[0] = mapObj.currentPosition[0];
-  //   mapObj.lastPosition[1] = mapObj.currentPosition[1];
+  // if(currentTool !== 1){
+  //   if(mapObj.currentPosition[0] === mapObj.lastPosition[0] && mapObj.currentPosition[1] === mapObj.lastPosition[1]){
+  //     return;
+  //   }else{
+  //     mapObj.lastPosition[0] = mapObj.currentPosition[0];
+  //     mapObj.lastPosition[1] = mapObj.currentPosition[1];
+  //   }
   // }
 
   DrawEditor(mapObj);
 
   //Square
   mapObj.ctx.beginPath();
-  mapObj.ctx.lineWidth = "1.25";
+  mapObj.ctx.lineWidth = "1.3";
   mapObj.ctx.strokeStyle = "red";
   mapObj.ctx.rect(mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
   mapObj.ctx.stroke();
 
   // Coordinates text
   var mapCoordinates = document.getElementById("editor_coordinates");
-  mapCoordinates.innerHTML =  "[X: " + mapObj.currentPosition[0] + ", Y: " + mapObj.currentPosition[1] + "] = " + mapObj.layer0[mapObj.currentPosition[0]][mapObj.currentPosition[1]];
+  mapCoordinates.innerHTML =  "[X: " + mapObj.currentPosition[0] + ", Y: " + mapObj.currentPosition[1] + "] = " + mapObj.layer0[currentLayer][mapObj.currentPosition[0]][mapObj.currentPosition[1]];
 }

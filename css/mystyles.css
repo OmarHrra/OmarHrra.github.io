@@ -50,6 +50,7 @@ canvas{
 .editor-area{
   padding: 0em 0em 0em 0em !important;
   overflow: auto;
+  max-height: 512px;
 }
 .tileset-area{
   padding: 0em 0em 0em 0.3em !important;
@@ -66,7 +67,7 @@ canvas{
 /* Rows */
 .s-row-1{
   /* border-bottom: 1px solid #e1e2e3; */
-  padding: 5px;
+  padding: 5px 5px 5px 2.5px;
 }
 .s-row-2{
   border-bottom: 1px solid #e0e1e2;
