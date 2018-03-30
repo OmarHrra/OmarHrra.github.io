@@ -8,8 +8,8 @@ window.onload = function() {
     "sizeY": 20,
     "tileSize": 16,
     "layer": [],
-    "currentPosition": [null, null],
-    "lastPosition": [null, null]
+    "currentPosition": [0, 0],
+    "lastPosition": [0, 0]
   };
   var isEditorClicked = false
 
@@ -67,9 +67,9 @@ function DrawEditor(mapObj){
   mapObj.ctx.clearRect(0, 0, mapObj.ctx.canvas.width, mapObj.ctx.canvas.height);
 
   // Draw layers
-  // for ( i = 0; i < 4; i++) {
-  //   for ( j = 0; j < mapObj.sizeX; j++) {
-  //     for ( k = 0; k < mapObj.sizeY; k++) {
+  // for (var i = 0; i < 4; i++) {
+  //   for (var j = 0; j < mapObj.sizeX; j++) {
+  //     for (var k = 0; k < mapObj.sizeY; k++) {
   //       var posXY = mapObj.layer[i][j][k].split(",");
   //       mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, j*mapObj.tileSize, k*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
   //     }
