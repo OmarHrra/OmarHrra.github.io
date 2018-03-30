@@ -87,8 +87,44 @@ function Listeners(mapObj){
 
   // Load map
   $("#load_json_a").on("click", function() {
-    // $("#load_json").trigger("click");
-    console.log("Load map");
+    $("#load_json").trigger("click");
+  });
+  $("#load_json").on("change", function() {
+    var file = this.files[0];
+    var reader = new FileReader();
+    reader.onload = function(progressEvent){
+      var mapLoaded = JSON.parse(this.result);
+      // Size
+      mapObj.sizeX = mapLoaded.sizeX;
+      mapObj.sizeY = mapLoaded.sizeY;
+      mapObj.ctx.canvas.width = mapObj.tileSize*mapObj.sizeX;
+      mapObj.ctx.canvas.height = mapObj.tileSize*mapObj.sizeY;
+
+      // Draw
+      mapObj.layer = [];
+
+      for (var i = 0; i < 4; i++) {
+        mapObj.layer[i] = [];
+      }
+      for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < mapObj.sizeX; j++) {
+          mapObj.layer[i][j] = [];
+        }
+      }
+
+      for (var i = 0; i < 4; i++) {
+        var layer = mapLoaded.layer[i].split(" ");
+        for (var j = 0; j < mapObj.sizeX; j++) {
+          for (var k = 0; k < mapObj.sizeY; k++) {
+            mapObj.layer[i][j][k] = layer[((j*mapObj.sizeY))+k];
+          }
+        }
+      }
+      console.log(mapObj.layer);
+      EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+    };
+    reader.readAsText(file);
+    this.value = null;
   });
 
   // Save map
@@ -109,10 +145,10 @@ function Listeners(mapObj){
     saveMapObj.name = "new_map";
     saveMapObj.sizeX = "" + mapObj.sizeX;
     saveMapObj.sizeY = "" + mapObj.sizeY;
-    for ( i = 0; i < 4; i++) {
+    for (var i = 0; i < 4; i++) {
       var layer = "";
-      for ( j = 0; j < mapObj.sizeX; j++) {
-        for ( k = 0; k < mapObj.sizeY; k++) {
+      for (var j = 0; j < mapObj.sizeX; j++) {
+        for (var k = 0; k < mapObj.sizeY; k++) {
           layer += mapObj.layer[i][j][k] + " ";
         }
       }
