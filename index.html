@@ -20,7 +20,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</a>
           <div class="dropdown-menu" aria-labelledby="dropdown">
-            <a class="dropdown-item" href="#" id="new_map">New</a>
+            <a class="dropdown-item" href="#" id="new_map" data-toggle="modal" data-target="#new_map_modal">New</a>
             <a class="dropdown-item" href="#" id="load_json_a">Load</a>
             <a class="dropdown-item" href="#" id="save_json">Save</a>
             <input class="dropdown-item" type="file" name="file" id="load_json" style="display:none;">
@@ -29,6 +29,48 @@
       </ul>
     </div>
   </nav>
+
+  <!-- Modal -->
+  <div class="modal fade" id="new_map_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Create new map</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Name:</label>
+                  <input type="text" class="form-control" id="new_map_name">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Width:</label>
+                  <input type="text" class="form-control" id="new_map_width">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Height:</label>
+                  <input type="text" class="form-control" id="new_map_height">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Content -->
   <div class="container-fluid unselectable">
@@ -69,13 +111,14 @@
       </div>
     </div>
   </div>
-    <!--Bootsrap-->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!--Editor-->
-    <script src="js/tileset.js"></script>
-    <script src="js/editor.js"></script>
-    <script src="js/buttons.js"></script>
+
+  <!--Bootsrap-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!--Editor-->
+  <script src="js/tileset.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/buttons.js"></script>
   </body>
 </html>
