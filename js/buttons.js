@@ -59,25 +59,62 @@ function SetLayer3 (){
 
 // Listeners
 function Listeners(mapObj){
+  var keyB = 66, // B, b = Paint Bucket
+        keyP = 80, // P, p = Pencil
+        keyE = 69, // E, e = Eraser
+        key1 = 49, // 1 = Layer0
+        key2 = 50, // 2 = Layer1
+        key3 = 51, // 3 = Layer2
+        key4 = 52; // 4 = Layer3
+
+    $(document).on('keydown', function(event){
+      shifted = event.shiftKey;
+      if(event.keyCode == keyP){
+        SetTool0();
+        // console.log("Pencil");
+      }
+      if(event.keyCode === keyB){
+        SetTool1();
+        // console.log("Paint Bucket");
+      }
+      if(event.keyCode === keyE){
+        SetTool2();
+        // console.log("Eraser");
+      }
+      if(event.keyCode === key1){
+        ChangeLayer(mapObj, 0);
+        // console.log("Layer0");
+      }
+      if(event.keyCode === key2){
+        ChangeLayer(mapObj, 1);
+        // console.log("Layer1");
+      }
+      if(event.keyCode === key3){
+        ChangeLayer(mapObj, 2);
+        // console.log("Layer2");
+      }
+      if(event.keyCode === key4){
+        ChangeLayer(mapObj, 3);
+        // console.log("Layer3");
+      }
+      if(event.altKey){
+        // SelectTile(tilesetObj, 0, 0);
+      }
+      console.log(event.keyCode);
+    });
+
+
   $("#btn_layer_0").click(function(event){
-    SetLayer0 ();
-    isEditorClicked = false;
-    EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+    ChangeLayer(mapObj, 0);
   });
   $("#btn_layer_1").click(function(event){
-    SetLayer1 ();
-    isEditorClicked = false;
-    EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+    ChangeLayer(mapObj, 1);
   });
   $("#btn_layer_2").click(function(event){
-    SetLayer2 ();
-    isEditorClicked = false;
-    EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+    ChangeLayer(mapObj, 2);
   });
   $("#btn_layer_3").click(function(event){
-    SetLayer3 ();
-    isEditorClicked = false;
-    EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+    ChangeLayer(mapObj, 3);
   });
 
   // New map
@@ -160,6 +197,27 @@ function Listeners(mapObj){
     download(jsonString, saveMapObj.name + ".json", 'text/json');
   });
 
+}
+
+function ChangeLayer(mapObj, i){
+  switch (i) {
+    case 0:
+      SetLayer0 ();
+      break;
+    case 1:
+      SetLayer1 ();
+      break;
+    case 2:
+      SetLayer2 ();
+      break;
+    case 3:
+      SetLayer3 ();
+      break;
+    default:
+      console.log("Error changing layer");
+  }
+  isEditorClicked = false;
+  EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
 }
 
 function download(text, name, type) {
