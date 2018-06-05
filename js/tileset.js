@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     "sizeX": 14,
     "sizeY": 32,
     "isClicked": false,
-    "direction": "images/tileset00.png",
+    // "direction": "https://image.ibb.co/i8zOLo/tiles00.png",
+    "direction": "https://image.ibb.co/mfewJT/tiles.png",
   };
 
   // Size
