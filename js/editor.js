@@ -18,8 +18,11 @@ window.onload = function() {
   mapObj.ctx.canvas.height = mapObj.tileSize*mapObj.sizeY;
 
   // Listeners
-  mapObj.ctx.canvas.addEventListener("mouseup", function(event){
+  document.addEventListener("mouseup", function(event){
     isEditorClicked = false;
+  });
+
+  mapObj.ctx.canvas.addEventListener("mouseup", function(event){
     EditorPointer(mapObj, event.offsetX, event.offsetY);
   });
 
@@ -33,10 +36,6 @@ window.onload = function() {
       Tool(mapObj);
     }
     EditorPointer(mapObj, event.offsetX, event.offsetY);
-  });
-
-  mapObj.ctx.canvas.addEventListener("mouseout", function(event){
-    // isEditorClicked = false;
   });
 
   Listeners(mapObj);
