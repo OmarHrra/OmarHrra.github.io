@@ -1,5 +1,9 @@
 var currentTool = 0,
-    currentLayer = 0;
+    currentLayer = 0,
+    isShiftPressed = false,
+    isEditorClicked = false,
+    axis = null;
+
 
 window.onload = function() {
   var mapObj = {
@@ -11,7 +15,6 @@ window.onload = function() {
     "currentPosition": [0, 0],
     "lastPosition": [0, 0]
   };
-  var isEditorClicked = false
 
   // Size
   mapObj.ctx.canvas.width = mapObj.tileSize*mapObj.sizeX;
@@ -20,6 +23,8 @@ window.onload = function() {
   // Listeners
   document.addEventListener("mouseup", function(event){
     isEditorClicked = false;
+    isShiftPressed = false;
+    axis = null;
   });
 
   mapObj.ctx.canvas.addEventListener("mouseup", function(event){
@@ -186,6 +191,27 @@ function EditorPointer(mapObj, posX, posY){
 
   mapObj.currentPosition[0] = Math.trunc(posX/mapObj.tileSize);
   mapObj.currentPosition[1] = Math.trunc(posY/mapObj.tileSize);
+
+  if(isShiftPressed == true && axis == null && isEditorClicked == true){
+    if(mapObj.currentPosition[0] != mapObj.lastPosition[0] || mapObj.currentPosition[1] != mapObj.lastPosition[1]){
+      if (mapObj.currentPosition[0] != mapObj.lastPosition[0]) {
+        axis = "Horizontal";
+      }
+      if (mapObj.currentPosition[1] != mapObj.lastPosition[1]) {
+        axis = "Vertical";
+      }
+    }else {
+
+    }
+  }
+
+  if(axis != null){
+    if(axis == "Horizontal"){
+      mapObj.currentPosition[1] = mapObj.lastPosition[1];
+    }else {
+      mapObj.currentPosition[0] = mapObj.lastPosition[0];
+    }
+  }
 
   // if(currentTool !== 1){
   //   if(mapObj.currentPosition[0] === mapObj.lastPosition[0] && mapObj.currentPosition[1] === mapObj.lastPosition[1]){

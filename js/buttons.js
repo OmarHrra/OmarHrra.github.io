@@ -65,10 +65,10 @@ function Listeners(mapObj){
         key1 = 49, // 1 = Layer0
         key2 = 50, // 2 = Layer1
         key3 = 51, // 3 = Layer2
-        key4 = 52; // 4 = Layer3
+        key4 = 52, // 4 = Layer3
+        keyShift = 16 // Shift;
 
-    $(document).on('keydown', function(event){
-      shifted = event.shiftKey;
+    $(document).on("keydown", function(event){
       if(event.keyCode == keyP){
         SetTool0();
         // console.log("Pencil");
@@ -99,6 +99,11 @@ function Listeners(mapObj){
       }
       if(event.altKey){
         // SelectTile(tilesetObj, 0, 0);
+      }
+      if(event.shiftKey){
+        isShiftPressed = true;
+        mapObj.lastPosition[0] = mapObj.currentPosition[0];
+        mapObj.lastPosition[1] = mapObj.currentPosition[1];
       }
       console.log(event.keyCode);
     });
