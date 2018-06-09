@@ -56,6 +56,20 @@ function SetLayer3 (){
   $("#btn_layer_2").removeClass("active-button");
   $("#btn_layer_3").addClass("active-button");
 }
+function SetLayer4 (){
+  currentLayer = 4;
+  $("#btn_layer_0").removeClass("active-button");
+  $("#btn_layer_1").removeClass("active-button");
+  $("#btn_layer_2").removeClass("active-button");
+  $("#btn_layer_3").removeClass("active-button");
+}
+function SetLayer5 (){
+  currentLayer = 5;
+  $("#btn_layer_0").removeClass("active-button");
+  $("#btn_layer_1").removeClass("active-button");
+  $("#btn_layer_2").removeClass("active-button");
+  $("#btn_layer_3").removeClass("active-button");
+}
 
 // Listeners
 function Listeners(mapObj){
@@ -66,6 +80,8 @@ function Listeners(mapObj){
         key2 = 50, // 2 = Layer1
         key3 = 51, // 3 = Layer2
         key4 = 52, // 4 = Layer3
+        key5 = 53, // 5 = Movement permissions
+        key6 = 54, // 6 = Events
         keyShift = 16 // Shift;
 
     $(document).on("keydown", function(event){
@@ -83,19 +99,27 @@ function Listeners(mapObj){
       }
       if(event.keyCode === key1){
         ChangeLayer(mapObj, 0);
-        // console.log("Layer0");
+        console.log("Layer0");
       }
       if(event.keyCode === key2){
         ChangeLayer(mapObj, 1);
-        // console.log("Layer1");
+        console.log("Layer1");
       }
       if(event.keyCode === key3){
         ChangeLayer(mapObj, 2);
-        // console.log("Layer2");
+        console.log("Layer2");
       }
       if(event.keyCode === key4){
         ChangeLayer(mapObj, 3);
-        // console.log("Layer3");
+        console.log("Layer3");
+      }
+      if(event.keyCode === key5){
+        ChangeLayer(mapObj, 4);
+        console.log("Movement permissions");
+      }
+      if(event.keyCode === key6){
+        ChangeLayer(mapObj, 5);
+        console.log("Events");
       }
       if(event.altKey){
         // SelectTile(tilesetObj, 0, 0);
@@ -121,6 +145,12 @@ function Listeners(mapObj){
   $("#btn_layer_3").click(function(event){
     ChangeLayer(mapObj, 3);
   });
+  // $("#btn_layer_4").click(function(event){
+  //   ChangeLayer(mapObj, 4);
+  // });
+  // $("#btn_layer_5").click(function(event){
+  //   ChangeLayer(mapObj, 5);
+  // });
 
   // New map
   $("#new_map").click(function(){
@@ -145,16 +175,16 @@ function Listeners(mapObj){
       // Draw
       mapObj.layer = [];
 
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 6; i++) {
         mapObj.layer[i] = [];
       }
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 6; i++) {
         for (var j = 0; j < mapObj.sizeX; j++) {
           mapObj.layer[i][j] = [];
         }
       }
 
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 6; i++) {
         var layer = mapLoaded.layer[i].split(" ");
         for (var j = 0; j < mapObj.sizeX; j++) {
           for (var k = 0; k < mapObj.sizeY; k++) {
@@ -179,15 +209,16 @@ function Listeners(mapObj){
                 "",
                 "",
                 "",
+                "",
+                "",
                 ""
-              ],
-      "permissions": ""
+              ]
     };
     var canvas = document.getElementById("editor_canvas");
     saveMapObj.name = "new_map";
     saveMapObj.sizeX = "" + mapObj.sizeX;
     saveMapObj.sizeY = "" + mapObj.sizeY;
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 6; i++) {
       var layer = "";
       for (var j = 0; j < mapObj.sizeX; j++) {
         for (var k = 0; k < mapObj.sizeY; k++) {
@@ -217,6 +248,12 @@ function ChangeLayer(mapObj, i){
       break;
     case 3:
       SetLayer3 ();
+      break;
+    case 4:
+      SetLayer4 ();
+      break;
+    case 5:
+      SetLayer5 ();
       break;
     default:
       console.log("Error changing layer");
