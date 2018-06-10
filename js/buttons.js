@@ -132,6 +132,10 @@ function Listeners(mapObj){
       console.log(event.keyCode);
     });
 
+    $(document).on("keyup", function(event){
+      isShiftPressed = false;
+      axis = null;
+    });
 
   $("#btn_layer_0").click(function(event){
     ChangeLayer(mapObj, 0);
