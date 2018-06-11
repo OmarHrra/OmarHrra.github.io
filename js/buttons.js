@@ -158,7 +158,55 @@ function Listeners(mapObj){
 
   // New map
   $("#new_map").click(function(){
-    console.log("New map");
+    // Size
+    mapObj.sizeX = $("#new_map_width").val();
+    mapObj.sizeY = $("#new_map_height").val();
+
+    if (mapObj.sizeX > 150) {
+      mapObj.sizeX = 150;
+      $("#new_map_width").val("150");
+    }
+    if (mapObj.sizeY > 150) {
+      mapObj.sizeY = 150;
+      $("#new_map_height").val("150");
+    }
+    if (mapObj.sizeX < 2) {
+      mapObj.sizeX = 2;
+      $("#new_map_width").val("2");
+    }
+    if (mapObj.sizeY < 2) {
+      mapObj.sizeY = 2;
+      $("#new_map_height").val("2");
+    }
+
+    mapObj.ctx.canvas.width = mapObj.tileSize*mapObj.sizeX;
+    mapObj.ctx.canvas.height = mapObj.tileSize*mapObj.sizeY;
+
+    // Draw
+    mapObj.layer = [];
+
+    // First draw
+    for (var i = 0; i < 6; i++) {
+      mapObj.layer[i] = [];
+    }
+    for (var i = 0; i < 6; i++) {
+      for (var j = 0; j < mapObj.sizeX; j++) {
+        mapObj.layer[i][j] = [];
+      }
+    }
+
+    for (var i = 0; i < mapObj.sizeX; i++) {
+      for (var j = 0; j < mapObj.sizeY; j++) {
+        mapObj.layer[0][i][j] = tileSelected[0] + "," + tileSelected[1]; // Layer 0
+        mapObj.layer[1][i][j] = "-1,-1"; // Layer 1
+        mapObj.layer[2][i][j] = "-1,-1"; // Layer 2
+        mapObj.layer[3][i][j] = "-1,-1"; // Layer 3
+        mapObj.layer[4][i][j] = "0"; // Movement permissions
+        mapObj.layer[5][i][j] = "0"; // Events
+      }
+    }
+    DrawEditor(mapObj);
+    EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
   });
 
   // Load map
@@ -219,7 +267,10 @@ function Listeners(mapObj){
               ]
     };
     var canvas = document.getElementById("editor_canvas");
-    saveMapObj.name = "new_map";
+    saveMapObj.name = $("#new_map_name").val();
+    if (saveMapObj.name === "") {
+      saveMapObj.name = "new_map";
+    }
     saveMapObj.sizeX = "" + mapObj.sizeX;
     saveMapObj.sizeY = "" + mapObj.sizeY;
     for (var i = 0; i < 6; i++) {

@@ -20,7 +20,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</a>
           <div class="dropdown-menu" aria-labelledby="dropdown">
-            <a class="dropdown-item" href="#" id="new_map" data-toggle="modal" data-target="#new_map_modal">New</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#new_map_modal">New</a>
             <a class="dropdown-item" href="#" id="load_json_a">Load</a>
             <a class="dropdown-item" href="#" id="save_json">Save</a>
             <input class="dropdown-item" type="file" name="file" id="load_json" style="display:none;">
@@ -46,19 +46,19 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="recipient-name" class="col-form-label">Name:</label>
-                  <input type="text" class="form-control" id="new_map_name">
+                  <input type="text" value="new_map" class="form-control" id="new_map_name">
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="recipient-name" class="col-form-label">Width:</label>
-                  <input type="text" class="form-control" id="new_map_width">
+                  <input type="number" min="2" max="150" value="20" class="form-control" id="new_map_width">
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="recipient-name" class="col-form-label">Height:</label>
-                  <input type="text" class="form-control" id="new_map_height">
+                  <input type="number" min="2" max="150" value="20" class="form-control" id="new_map_height">
                 </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="new_map">Create</button>
         </div>
       </div>
     </div>

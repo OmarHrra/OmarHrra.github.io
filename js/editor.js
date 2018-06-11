@@ -8,8 +8,8 @@ var currentTool = 0,
 window.onload = function() {
   var mapObj = {
     "ctx": document.getElementById("editor_canvas").getContext("2d"),
-    "sizeX": 20,
-    "sizeY": 20,
+    "sizeX": $("#new_map_width").val(),
+    "sizeY": $("#new_map_height").val(),
     "tileSize": 16,
     "layer": [],
     "currentPosition": [0, 0],
