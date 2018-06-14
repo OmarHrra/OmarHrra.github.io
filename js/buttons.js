@@ -82,7 +82,11 @@ function Listeners(mapObj){
         key4 = 52, // 4 = Layer3
         key5 = 53, // 5 = Movement permissions
         key6 = 54, // 6 = Events
-        keyShift = 16 // Shift;
+        keyShift      = 16, // Shift
+        keyArrowLeft  = 37, // Arroy Left
+        keyArrowUp    = 38, // Arrow Up
+        keyArrowRight = 39, // Arroy Right
+        keyArrowDown  = 40; // Arrow Down
 
     $(document).on("keydown", function(event){
       if(event.keyCode == keyP){
@@ -129,6 +133,40 @@ function Listeners(mapObj){
         mapObj.lastPosition[0] = mapObj.currentPosition[0];
         mapObj.lastPosition[1] = mapObj.currentPosition[1];
       }
+      // Arrows
+      if(event.keyCode === keyArrowLeft){
+        offset[0] -= 1;
+        if(offset[0] < 0){
+          offset[0] = 0;
+        }
+        EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+        // console.log("Arrow Left");
+      }
+      if(event.keyCode === keyArrowUp){
+        offset[1] -= 1;
+        if(offset[1] < 0){
+          offset[1] = 0;
+        }
+        EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+        // console.log("Arrow Up");
+      }
+      if(event.keyCode === keyArrowRight){
+        offset[0] += 1;
+        if(offset[0] > mapObj.sizeX - mapObj.canvasSizeX){
+          offset[0] = mapObj.sizeX - mapObj.canvasSizeX;
+        }
+        EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+        // console.log("Arrow Right");
+      }
+      if(event.keyCode === keyArrowDown){
+        offset[1] += 1;
+        if(offset[1] > mapObj.sizeY - mapObj.canvasSizeY){
+          offset[1] = mapObj.sizeY - mapObj.canvasSizeY;
+        }
+        EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+        // console.log("Arrow Down");
+      }
+
       console.log(event.keyCode);
     });
 
@@ -179,8 +217,22 @@ function Listeners(mapObj){
       $("#new_map_height").val("2");
     }
 
-    mapObj.ctx.canvas.width = mapObj.tileSize*mapObj.sizeX;
-    mapObj.ctx.canvas.height = mapObj.tileSize*mapObj.sizeY;
+    var sizeX, sizeY;
+
+    if (mapObj.sizeX < mapObj.canvasSizeX) {
+      sizeX = mapObj.sizeX;
+    }else {
+      sizeX = mapObj.canvasSizeX;
+    }
+
+    if (mapObj.sizeY < mapObj.canvasSizeY) {
+      sizeY = mapObj.sizeY;
+    }else {
+      sizeY = mapObj.canvasSizeY;
+    }
+
+    mapObj.ctx.canvas.width = mapObj.tileSize*sizeX;
+    mapObj.ctx.canvas.height = mapObj.tileSize*sizeY;
 
     // Draw
     mapObj.layer = [];
@@ -221,8 +273,23 @@ function Listeners(mapObj){
       // Size
       mapObj.sizeX = mapLoaded.sizeX;
       mapObj.sizeY = mapLoaded.sizeY;
-      mapObj.ctx.canvas.width = mapObj.tileSize*mapObj.sizeX;
-      mapObj.ctx.canvas.height = mapObj.tileSize*mapObj.sizeY;
+
+      var sizeX, sizeY;
+
+      if (mapObj.sizeX < mapObj.canvasSizeX) {
+        sizeX = mapObj.sizeX;
+      }else {
+        sizeX = mapObj.canvasSizeX;
+      }
+
+      if (mapObj.sizeY < mapObj.canvasSizeY) {
+        sizeY = mapObj.sizeY;
+      }else {
+        sizeY = mapObj.canvasSizeY;
+      }
+
+      mapObj.ctx.canvas.width = mapObj.tileSize*sizeX;
+      mapObj.ctx.canvas.height = mapObj.tileSize*sizeY;
 
       // Draw
       mapObj.layer = [];
@@ -245,6 +312,7 @@ function Listeners(mapObj){
         }
       }
       console.log(mapObj.layer);
+      DrawEditor(mapObj);
       EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
     };
     reader.readAsText(file);
