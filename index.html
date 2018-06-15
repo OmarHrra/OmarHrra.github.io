@@ -7,6 +7,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="css/mystyles.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <title>Map Editor</title>
 </head>
 <body>
@@ -23,6 +24,7 @@
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#new_map_modal">New</a>
             <a class="dropdown-item" href="#" id="load_json_a">Load</a>
             <a class="dropdown-item" href="#" id="save_json">Save</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#options_modal">Options</a>
             <input class="dropdown-item" type="file" name="file" id="load_json" style="display:none;">
           </div>
         </li>
@@ -30,7 +32,7 @@
     </div>
   </nav>
 
-  <!-- Modal -->
+  <!-- Modal New Map -->
   <div class="modal fade" id="new_map_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -72,6 +74,43 @@
     </div>
   </div>
 
+  <!-- Modal Options -->
+  <div class="modal fade" id="options_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Options</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <h6>Canvas</h6>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Width:</label>
+                  <input type="number" min="10" max="50" value="20" class="form-control" id="options_canvas_width">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Height:</label>
+                  <input type="number" min="10" max="32" value="20" class="form-control" id="options_canvas_height">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="options_save_changes">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Content -->
   <div class="container-fluid unselectable">
     <div class="row s-row-1 bg-primary">
@@ -107,7 +146,7 @@
         <p id="editor_coordinates" class="text-left">[X: 0, Y: 0] = 0,0</p>
       </div>
       <div class="col-2">
-        <p class="float-right text-right"><img src="images/Twitter_Social_Icon_Circle_Color.png" alt="Twitter" width="25" height="25"> <a target="_blank" href="https://twitter.com/OmarHrra">@OmarHrra</a></p>
+        <!-- <p class="float-right text-right"><img src="images/Twitter_Social_Icon_Circle_Color.png" alt="Twitter" width="25" height="25"> <a target="_blank" href="https://twitter.com/OmarHrra">@OmarHrra</a></p> -->
       </div>
     </div>
   </div>

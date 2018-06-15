@@ -7,18 +7,25 @@ var currentTool = 0,
 
 window.onload = function() {
   var mapObj = {
-    "ctx": document.getElementById("editor_canvas").getContext("2d"),
-    "sizeX": $("#new_map_width").val(),
-    "sizeY": $("#new_map_height").val(),
-    "tileSize": 16,
-    "layer": [],
-    "currentPosition": [0, 0],
-    "lastPosition": [0, 0],
-    "canvasSizeX" : 20,
-    "canvasSizeY" : 20
+    "ctx"             : document.getElementById("editor_canvas").getContext("2d"),
+    "canvasSizeX"     : parseInt($("#options_canvas_width").val()),
+    "canvasSizeY"     : parseInt($("#options_canvas_height").val()),
+    "sizeX"           : parseInt($("#new_map_width").val()),
+    "sizeY"           : parseInt($("#new_map_height").val()),
+    "tileSize"        : 16,
+    "layer"           : [],
+    "currentPosition" : [0, 0],
+    "lastPosition"    : [0, 0]
   };
 
-  // Size
+  if (mapObj.canvasSizeX >= mapObj.sizeX) {
+    mapObj.canvasSizeX = mapObj.sizeX;
+    $("#options_canvas_width").val(mapObj.sizeX);
+  }
+  if (mapObj.canvasSizeY >= mapObj.sizeY) {
+    mapObj.canvasSizeY = mapObj.sizeY;
+    $("#options_canvas_height").val(mapObj.sizeY);
+  }
   mapObj.ctx.canvas.width = mapObj.tileSize*mapObj.canvasSizeX;
   mapObj.ctx.canvas.height = mapObj.tileSize*mapObj.canvasSizeY;
 
@@ -59,6 +66,7 @@ window.onload = function() {
 
   for (var i = 0; i < mapObj.sizeX; i++) {
     for (var j = 0; j < mapObj.sizeY; j++) {
+      // mapObj.layer[0][i][j] = Math.floor(Math.random() * 13) + "," + Math.floor(Math.random() * 31); // Layer 0
       mapObj.layer[0][i][j] = tileSelected[0] + "," + tileSelected[1]; // Layer 0
       mapObj.layer[1][i][j] = "-1,-1"; // Layer 1
       mapObj.layer[2][i][j] = "-1,-1"; // Layer 2
@@ -71,26 +79,13 @@ window.onload = function() {
 };
 
 function DrawEditor(mapObj){
-  var sizeX, sizeY;
-
-  if (mapObj.sizeX < mapObj.canvasSizeX) {
-    sizeX = mapObj.sizeX;
-  }else {
-    sizeX = mapObj.canvasSizeX;
-  }
-
-  if (mapObj.sizeY < mapObj.canvasSizeY) {
-    sizeY = mapObj.sizeY;
-  }else {
-    sizeY = mapObj.canvasSizeY;
-  }
   // Clear map
   mapObj.ctx.clearRect(0, 0, mapObj.ctx.canvas.width, mapObj.ctx.canvas.height);
 
   if (currentLayer <= 3) {
     // Draw layer 0
-    for (var i = 0; i < sizeX; i++) {
-      for (var j = 0; j < sizeY; j++) {
+    for (var i = 0; i < mapObj.canvasSizeX; i++) {
+      for (var j = 0; j < mapObj.canvasSizeY; j++) {
         var posXY = mapObj.layer[0][i+offset[0]][j+offset[1]].split(",");
         mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, i*mapObj.tileSize, j*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
       }
@@ -105,8 +100,8 @@ function DrawEditor(mapObj){
       mapObj.ctx.fillRect(0, 0, mapObj.ctx.canvas.width, mapObj.ctx.canvas.height);
       mapObj.ctx.globalAlpha = 1;
     }
-    for (var i = 0; i < sizeX; i++) {
-      for (var j = 0; j < sizeY; j++) {
+    for (var i = 0; i < mapObj.canvasSizeX; i++) {
+      for (var j = 0; j < mapObj.canvasSizeY; j++) {
         var posXY = mapObj.layer[1][i+offset[0]][j+offset[1]].split(",");
         mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, i*mapObj.tileSize, j*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
       }
@@ -121,8 +116,8 @@ function DrawEditor(mapObj){
       mapObj.ctx.fillRect(0, 0, mapObj.ctx.canvas.width, mapObj.ctx.canvas.height);
       mapObj.ctx.globalAlpha = 1;
     }
-    for (var i = 0; i < sizeX; i++) {
-      for (var j = 0; j < sizeY; j++) {
+    for (var i = 0; i < mapObj.canvasSizeX; i++) {
+      for (var j = 0; j < mapObj.canvasSizeY; j++) {
         var posXY = mapObj.layer[2][i+offset[0]][j+offset[1]].split(",");
         mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, i*mapObj.tileSize, j*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
       }
@@ -137,8 +132,8 @@ function DrawEditor(mapObj){
       mapObj.ctx.fillRect(0, 0, mapObj.ctx.canvas.width, mapObj.ctx.canvas.height);
       mapObj.ctx.globalAlpha = 1;
     }
-    for (var i = 0; i < sizeX; i++) {
-      for (var j = 0; j < sizeY; j++) {
+    for (var i = 0; i < mapObj.canvasSizeX; i++) {
+      for (var j = 0; j < mapObj.canvasSizeY; j++) {
         var posXY = mapObj.layer[3][i+offset[0]][j+offset[1]].split(",");
         mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, i*mapObj.tileSize, j*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
       }
@@ -146,8 +141,8 @@ function DrawEditor(mapObj){
   }else {
     // Draw all layers
     for (var i = 0; i < 6; i++) {
-      for (var j = 0; j < sizeX; j++) {
-        for (var k = 0; k < sizeY; k++) {
+      for (var j = 0; j < mapObj.canvasSizeX; j++) {
+        for (var k = 0; k < mapObj.canvasSizeY; k++) {
           var posXY = mapObj.layer[i][j+offset[0]][k+offset[1]].split(",");
           mapObj.ctx.drawImage(currentTileset, posXY[0]*mapObj.tileSize, posXY[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize, j*mapObj.tileSize, k*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
         }
