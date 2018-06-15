@@ -433,6 +433,8 @@ function Listeners(mapObj){
   //   ChangeLayer(mapObj, 5);
   // });
 
+
+  // Option: Grid
   $("#colorpicker").on("change", function() {
   	$("#hexcolor").val(this.value);
     DrawEditor(mapObj);
@@ -452,4 +454,58 @@ function Listeners(mapObj){
     }
   });
 
+  // Load example
+  $("#load_example").click(function(event){
+    let url = "https://api.myjson.com/bins/106moe";
+    fetch(url)
+    .then(res => res.json())
+    .then((out) => {
+      console.log("Map loaded: ", out);
+
+      mapObj.sizeX = out.sizeX;
+      mapObj.sizeY = out.sizeY;
+
+      if (mapObj.sizeX >= mapObj.canvasSizeX) {
+        mapObj.canvasSizeX = parseInt($("#options_canvas_width").val());
+      }
+      if (mapObj.sizeY >= mapObj.canvasSizeY) {
+        mapObj.canvasSizeY = parseInt($("#options_canvas_height").val());
+      }
+
+      if (mapObj.canvasSizeX >= mapObj.sizeX) {
+        mapObj.canvasSizeX = mapObj.sizeX;
+      }
+      if (mapObj.canvasSizeY >= mapObj.sizeY) {
+        mapObj.canvasSizeY = mapObj.sizeY;
+      }
+
+      mapObj.ctx.canvas.width = mapObj.tileSize*mapObj.canvasSizeX;
+      mapObj.ctx.canvas.height = mapObj.tileSize*mapObj.canvasSizeY;
+
+
+      // Draw
+      mapObj.layer = [];
+
+      for (var i = 0; i < 6; i++) {
+        mapObj.layer[i] = [];
+      }
+      for (var i = 0; i < 6; i++) {
+        for (var j = 0; j < mapObj.sizeX; j++) {
+          mapObj.layer[i][j] = [];
+        }
+      }
+
+      for (var i = 0; i < 6; i++) {
+        var layer = out.layer[i].split(" ");
+        for (var j = 0; j < mapObj.sizeX; j++) {
+          for (var k = 0; k < mapObj.sizeY; k++) {
+            mapObj.layer[i][j][k] = layer[((j*mapObj.sizeY))+k];
+          }
+        }
+      }
+      DrawEditor(mapObj);
+      EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+    })
+    .catch(err => { throw err });
+  });
 }

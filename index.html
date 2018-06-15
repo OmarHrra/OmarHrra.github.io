@@ -29,8 +29,48 @@
           </div>
         </li>
       </ul>
+      <a class="btn btn-primary btn-sm ml-auto" href="#" id="load_example">Load example</a>
     </div>
   </nav>
+  <!-- Content -->
+  <div class="container-fluid unselectable">
+    <div class="row s-row-1 bg-primary">
+      <div class="col-3 s-col-1">
+        <p class="tileset_status text-center card-text">Tileset</p>
+      </div>
+      <div class="col-9">
+        <div class="col d-flex justify-content-start">
+          <a class="active-button tool-button" id="btn_layer_0"><img src="images/layer0.png" alt="layer0" width="30" height="30"></a>
+          <a class="tool-button" id="btn_layer_1"><img src="images/layer1.png" alt="layer1" width="30" height="30"></a>
+          <a class="tool-button" id="btn_layer_2"><img src="images/layer2.png" alt="layer2" width="30" height="30"></a>
+          <a class="tool-button" id="btn_layer_3"><img src="images/layer3.png" alt="layer3" width="30" height="30"></a>
+
+          <a class="active-button tool-button" id="btn_tool_0"><img src="images/pencil.png" alt="pencil" width="30" height="30"></a>
+          <a class="tool-button" id="btn_tool_1"><img src="images/bucket.png" alt="paint bucket" width="30" height="30"></a>
+          <a class="tool-button" id="btn_tool_2"><img src="images/erase.png" alt="erase" width="30" height="30"></a>
+        </div>
+      </div>
+    </div>
+    <div class="row s-row-2 bg-light">
+      <div class="col-3 s-col-2 tileset-area">
+        <canvas id="tileset_canvas" width="224" height="512"></canvas>
+      </div>
+      <div class="col-9 editor-area">
+        <canvas id="editor_canvas" width="320" height="320"></canvas>
+      </div>
+    </div>
+    <div class="row s-row-3 bg-light">
+      <div class="col-3 s-col-3">
+        <p id="tileset_coordinates" class="text-left">Tile: [X: 0, Y: 0]</p>
+      </div>
+      <div class="col-7">
+        <p id="editor_coordinates" class="text-left">[X: 0, Y: 0] = 0,0</p>
+      </div>
+      <div class="col-2">
+        <p class="float-right text-right"><img src="images/Twitter_Social_Icon_Circle_Color.png" alt="Twitter" width="25" height="25"> <a target="_blank" href="https://twitter.com/OmarHrra">@OmarHrra</a></p>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal New Map -->
   <div class="modal fade" id="new_map_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -123,46 +163,6 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" id="options_save_changes">Change</button>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Content -->
-  <div class="container-fluid unselectable">
-    <div class="row s-row-1 bg-primary">
-      <div class="col-3 s-col-1">
-        <p class="tileset_status text-center card-text">Tileset</p>
-      </div>
-      <div class="col-9">
-        <div class="col d-flex justify-content-start">
-          <a class="active-button tool-button" id="btn_layer_0"><img src="images/layer0.png" alt="layer0" width="30" height="30"></a>
-          <a class="tool-button" id="btn_layer_1"><img src="images/layer1.png" alt="layer1" width="30" height="30"></a>
-          <a class="tool-button" id="btn_layer_2"><img src="images/layer2.png" alt="layer2" width="30" height="30"></a>
-          <a class="tool-button" id="btn_layer_3"><img src="images/layer3.png" alt="layer3" width="30" height="30"></a>
-
-          <a class="active-button tool-button" id="btn_tool_0"><img src="images/pencil.png" alt="pencil" width="30" height="30"></a>
-          <a class="tool-button" id="btn_tool_1"><img src="images/bucket.png" alt="paint bucket" width="30" height="30"></a>
-          <a class="tool-button" id="btn_tool_2"><img src="images/erase.png" alt="erase" width="30" height="30"></a>
-        </div>
-      </div>
-    </div>
-    <div class="row s-row-2 bg-light">
-      <div class="col-3 s-col-2 tileset-area">
-        <canvas id="tileset_canvas" width="224" height="512"></canvas>
-      </div>
-      <div class="col-9 editor-area">
-        <canvas id="editor_canvas" width="320" height="320"></canvas>
-      </div>
-    </div>
-    <div class="row s-row-3 bg-light">
-      <div class="col-3 s-col-3">
-        <p id="tileset_coordinates" class="text-left">Tile: [X: 0, Y: 0]</p>
-      </div>
-      <div class="col-7">
-        <p id="editor_coordinates" class="text-left">[X: 0, Y: 0] = 0,0</p>
-      </div>
-      <div class="col-2">
-        <!-- <p class="float-right text-right"><img src="images/Twitter_Social_Icon_Circle_Color.png" alt="Twitter" width="25" height="25"> <a target="_blank" href="https://twitter.com/OmarHrra">@OmarHrra</a></p> -->
       </div>
     </div>
   </div>
