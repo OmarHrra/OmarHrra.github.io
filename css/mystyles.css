@@ -123,3 +123,14 @@ canvas{
   left: auto !important;
   right: 0px;
 }
+
+.colorinput{
+  background: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+input[type="text"]:invalid{
+  background: #c33131;
+  color: #fff;
+}

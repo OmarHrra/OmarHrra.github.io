@@ -15,7 +15,8 @@ window.onload = function() {
     "tileSize"        : 16,
     "layer"           : [],
     "currentPosition" : [0, 0],
-    "lastPosition"    : [0, 0]
+    "lastPosition"    : [0, 0],
+    "grid"            : false
   };
 
   if (mapObj.canvasSizeX >= mapObj.sizeX) {
@@ -156,6 +157,9 @@ function DrawEditor(mapObj){
   }
 
   mapObj.ctx.globalAlpha = 1;
+  if (mapObj.grid) {
+    Grid(mapObj);
+  }
 }
 
 function Tool(mapObj){
@@ -248,11 +252,29 @@ function EditorPointer(mapObj, posX, posY){
   mapObj.ctx.rect(mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize, mapObj.tileSize, mapObj.tileSize);
   mapObj.ctx.stroke();
 
+
+
   // Coordinates text
   var mapCoordinates = document.getElementById("editor_coordinates");
   if (currentLayer <= 3) {
     mapCoordinates.innerHTML =  "[X: " + (mapObj.currentPosition[0]+offset[0]) + ", Y: " + (mapObj.currentPosition[1]+offset[1]) + "] = " + mapObj.layer[currentLayer][mapObj.currentPosition[0]+offset[0]][mapObj.currentPosition[1]+offset[1]];
   }else {
     mapCoordinates.innerHTML =  "[X: " + (mapObj.currentPosition[0]+offset[0]) + ", Y: " + (mapObj.currentPosition[1]+offset[1]) + "]";
+  }
+}
+
+function Grid(mapObj){
+  mapObj.ctx.lineWidth = "1.0";
+  mapObj.ctx.strokeStyle = $("#hexcolor").val();
+  for (var i = 1; i < mapObj.canvasSizeX; i++) {
+      mapObj.ctx.beginPath();
+      mapObj.ctx.moveTo(i*mapObj.tileSize,0);
+      mapObj.ctx.lineTo(i*mapObj.tileSize,mapObj.canvasSizeY*mapObj.tileSize);
+      mapObj.ctx.stroke();
+
+      mapObj.ctx.beginPath();
+      mapObj.ctx.moveTo(0,i*mapObj.tileSize);
+      mapObj.ctx.lineTo(mapObj.canvasSizeX*mapObj.tileSize,i*mapObj.tileSize);
+      mapObj.ctx.stroke();
   }
 }

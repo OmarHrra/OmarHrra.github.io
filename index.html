@@ -101,11 +101,27 @@
                 </div>
               </div>
             </div>
+            <h6>Grid</h6>
+            <div class="row">
+              <div class="col-md-4">
+                <input class="colorinput" type="color" id="colorpicker" name="color" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="#49f9ff">
+              </div>
+              <div class="col-md-4">
+                <input class="form-control" type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="#49f9ff" id="hexcolor"></input>
+              </div>
+              <div class="col-md-4">
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="show_grid">
+                  <label class="form-check-label" for="show_grid">Show grid
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" id="options_save_changes">Save changes</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="options_save_changes">Change</button>
         </div>
       </div>
     </div>
@@ -146,7 +162,7 @@
         <p id="editor_coordinates" class="text-left">[X: 0, Y: 0] = 0,0</p>
       </div>
       <div class="col-2">
-        <p class="float-right text-right"><img src="images/Twitter_Social_Icon_Circle_Color.png" alt="Twitter" width="25" height="25"> <a target="_blank" href="https://twitter.com/OmarHrra">@OmarHrra</a></p>
+        <!-- <p class="float-right text-right"><img src="images/Twitter_Social_Icon_Circle_Color.png" alt="Twitter" width="25" height="25"> <a target="_blank" href="https://twitter.com/OmarHrra">@OmarHrra</a></p> -->
       </div>
     </div>
   </div>

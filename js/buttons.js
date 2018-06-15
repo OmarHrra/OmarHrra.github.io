@@ -432,8 +432,24 @@ function Listeners(mapObj){
   // $("#btn_layer_5").click(function(event){
   //   ChangeLayer(mapObj, 5);
   // });
-}
 
-function RescaleCanvas(mapObj){
+  $("#colorpicker").on("change", function() {
+  	$("#hexcolor").val(this.value);
+    DrawEditor(mapObj);
+    EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+  });
+  $("#hexcolor").on("change", function() {
+    $("#colorpicker").val(this.value);
+    DrawEditor(mapObj);
+    EditorPointer(mapObj, mapObj.currentPosition[0]*mapObj.tileSize, mapObj.currentPosition[1]*mapObj.tileSize);
+  });
+
+  $("#show_grid").change(function() {
+    if(this.checked) {
+      mapObj.grid = true;
+    }else {
+      mapObj.grid = false;
+    }
+  });
 
 }
